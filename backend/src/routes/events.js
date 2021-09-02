@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 const express = require('express');
+const mongoose = require('mongoose');
 require('../models/Event');
 const Event = mongoose.model('events')
 
@@ -16,13 +16,15 @@ router.post('/events/add', (req, res) => {
     end_time: req.body.end_time,
   }
 
+  console.log(newEvent)
+
   Event.find({desc: newEvent.desc}).then(result => {
     if(result){
       res.send("Dois eventos com o mesmo nome").status(300)
     }else {
       new Event(newEvent).save().then((result) => {
         console.log('Event registred')
-        return res.send(result).status(201)
+        res.send(result).status(201)
       }).catch((error) => {
         console.log("Error")
       })
