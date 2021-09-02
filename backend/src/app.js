@@ -1,24 +1,45 @@
 // Loading the modules
-  const express = require('express')
-  const app = express()
-  const mongoose = require('mongoose')
-  const events = require('./routes/events')
-  const user = require('./routes/user')
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+
+const events = require("./routes/events");
+const user = require("./routes/user");
+const passport = require("passport");
+const session = require("express-session");
+require("./config/auth")(passport);
+
+app.use(passport.initialize());
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: "apsojfsdiofjdosijfdiosfjisd"
+}))
+
 // Moongose
-  mongoose.connect("mongodb://localhost/estagio").then(() => {
-    console.log('Server connected')
-  }).catch((error) => {
-    console.log(error)
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(events);
+app.use(user);
+
+mongoose
+  .connect("mongodb://localhost/estagio")
+  .then(() => {
+    console.log("Server connected");
   })
+  .catch((error) => {
+    console.log(error);
+  });
+mongoose.Promise = global.Promise;
 
-  mongoose.Promise = global.Promise
-  app.use(express.json())
-  app.use(events)
-  app.use(user)
 
-  const PORT = 3333;
+app.get('/', (req, res) => {
+  res.send({msg: "Logado"})
+})
 
-  app.listen(PORT, () => {
-    console.log(`Server initialized in port ${PORT}`)
-  })
+const PORT = 3333;
+
+app.listen(PORT, () => {
+  console.log(`Server initialized in port ${PORT}`);
+});
