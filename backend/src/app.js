@@ -1,14 +1,16 @@
 // Loading the modules
 const express = require("express");
 const app = express();
+const cors = require('cors')
 const mongoose = require("mongoose");
-
 const events = require("./routes/events");
 const user = require("./routes/user");
 const passport = require("passport");
 const session = require("express-session");
 require("./config/auth")(passport);
 
+
+app.use(cors())
 app.use(passport.initialize());
 app.use(session({
   resave: false,
