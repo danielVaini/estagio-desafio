@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const isUser = require("../helpers/isUser");
+
 require("../models/Event");
 const Event = mongoose.model("events");
 
@@ -40,23 +40,20 @@ router.post("/events/add", (req, res) => {
     .catch((error) => res.send(error));
 });
 
-router.put("/events/edit/:id", (req, res) => {
-  const {id} = req.params
-  const {desc, start_time, end_time, date } = req.body;
-  Event.findOne({ _id: id }).lean().then((event) => {
-        console.log(event)
-      event.desc = desc;
-      event.start_time = start_time ;
-      event.end_time = end_time ;
-      event.date = date;
-      event.save().then((result) => {
-        console.log(result)
-        res.send(result).status(201);
-          console.log(result);
-        })
-        .catch((error) => res.send(error));
-    })
-    .catch((error) => res.send(error));
+router.put("/events/edit", (req, res) => {
+  
+  Event.findById(req.body.id).then(event => {
+    event.desc = req.body.desc
+    event.start_time = req.body.start_time
+    event.end_time = req.body.end_time
+    event.date = req.body.date
+    event.save()
+    res.send(event).status(200)
+  }).catch(error => res.send(error))
+ 
+
+  
+ 
 });
 
 router.get("/events/remove/:id", (req, res) => {
