@@ -4,6 +4,7 @@ import Cadastro from '../Cadastro/Cadastro';
 import Edit from '../Edit/Edit';
 import Eventos from '../Eventos/Eventos';
 import Login from '../Login/Login';
+import Sobre from '../Sobre/Sobre';
 
 
 
@@ -17,6 +18,7 @@ const Routes = () => {
       <Route path="/cadastro"  component={Cadastro} />
       <Route path="/events" exact component={Eventos} />
       <Route path="/events/edit/:id"  component={Edit} />
+      <Route path="/sobre"  component={Sobre} />
       </Switch>
     </BrowserRouter>
     )
