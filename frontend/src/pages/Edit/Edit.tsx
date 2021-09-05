@@ -25,16 +25,23 @@ const Edit = () => {
       setDesc(result.data[0].desc)
       setStartTime(result.data[0].start_time)
       setEndTime(result.data[0].end_time)
-      setDate(result.data[0].date)
+      let data = result.data[0].date
+      let novaData = data.split("/")
+      novaData = novaData.reverse()
+      novaData = novaData.join("-")
+      
+      setDate(novaData)
+   
     }).catch(error => console.log(error))
-  }, [])
+  }, [id])
   
   function handleEdit(e: FormEvent) {
     e.preventDefault()
+    console.log(date)
     const novaData = new Date(date)
     const dataFormatada = novaData.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
     
-    api.put(`/events/edit/${id}`, {desc, start_time, end_time, date: dataFormatada})
+    api.put(`/events/edit`, {id, desc, start_time, end_time, date: dataFormatada})
     .then(res => {
       window.alert("Editado com sucesso")
       goevents()
@@ -46,12 +53,12 @@ const Edit = () => {
   return (
     <div className="Edit container-fluid">
       <Nav />
-      <div role="form" className="form-edit">
+      <form className="form-edit">
         <div className="container-edit">
 
           <div className="row align-items-end mt-6">
             <div className="col">
-              
+             
               <label htmlFor="title">Titulo</label>
               <input 
                 type="text" 
@@ -83,6 +90,7 @@ const Edit = () => {
                   id="end-time" name="end_time" 
                   value={end_time} 
                   onChange={e => setEndTime(e.target.value)}
+                  required
                   />
               </div>
             </div>
@@ -93,9 +101,11 @@ const Edit = () => {
                 <input 
                   type="date" 
                   className="form-control cm-input" 
-                  id="date" name="date" 
+                  id="date" 
+                  name="date" 
                   value={date} 
                   onChange={e => setDate(e.target.value)}
+                  required
                   />
               </div>
             </div>
@@ -110,7 +120,7 @@ const Edit = () => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   )
 }
