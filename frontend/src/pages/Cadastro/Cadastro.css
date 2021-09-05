@@ -1,0 +1,53 @@
+.Cadastro {
+  display: flex;
+}
+
+.Cadastro .icon {
+  width: 60%;
+  height: 100vh;
+
+  background: linear-gradient(180deg, #0E2AA3 0%, #0D30C2 27.6%, #073DEA 67.71%, #0043FF 100%);;
+
+  margin-left: -12px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.Cadastro .icon img{
+  width: 372;
+  height: 257px;
+
+  margin-right: 188px;
+  margin-top: 156px;
+  
+}
+
+
+.Cadastro .input-bg {
+  width: 50%;
+  height: 100vh;
+  position: absolute;
+  left: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #CBD3E8;
+
+ 
+}
+
+.Cadastro .input-bg .btns-container {
+  width: 50%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.Cadastro .input-bg .input-container {
+  width: 50%;
+}
