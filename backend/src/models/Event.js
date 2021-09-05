@@ -13,6 +13,10 @@ const Event = new Schema({
   end_time: {
     type: String,
     required: true
+  },
+  date: {
+    type: String,
+    required: true
   }
 })
 
