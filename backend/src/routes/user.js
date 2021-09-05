@@ -28,7 +28,7 @@ router.post("/cadastro", (req, res) => {
     bcryptjs.genSalt(10, (error, salt) => {
       bcryptjs.hash(newUser.password, salt, (error, hash) => {
         if (error) {
-          res.redirect("/");
+          res.redirect("/cadastro");
         }
 
         newUser.password = hash;
@@ -37,7 +37,8 @@ router.post("/cadastro", (req, res) => {
           .save()
           .then((result) => {
             console.log("User registred");
-            res.send(result).status(201);
+            
+            res.redirect('/login')
           })
           .catch((error) => {
             console.log(error);
@@ -47,40 +48,19 @@ router.post("/cadastro", (req, res) => {
   }).catch(error => res.status(400).send({messagem: "Erro interno"}))
 });
 
-router.post("/cadastro", (req, res) => {
-  User.findOne({ _id: req.body.id })
-    .then((user) => {
-      user.name = req.body.name;
-
-      user
-        .save()
-        .then((result) => {
-          console.log("Edit");
-          res.send(result);
-        })
-        .catch((error) => {
-          res.send(error);
-        });
-    })
-    .catch((error) => {
-      res.send(error);
-    });
-});
 
 router.post('/login', (req, res, next) => {
+  console.log(req.body.email)
   passport.authenticate('local', {
-    successRedirect: '/login',
-    failureRedirect: '/error',
-  
+    successRedirect: '/events',
+    failureRedirect: '/login',
   })(req, res, next)
+  
 })
 
-router.get('/login', (req, res) => {
-  res.send({msg: "Logado"})
-})
-router.get('/error', (req, res) => {
-  res.send({msg: "Error"})
-})
+
+
+
 
 
 
