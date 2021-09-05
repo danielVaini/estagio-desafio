@@ -45,7 +45,7 @@ const ListEvents = () => {
               <td>{event.end_time}</td>
               <td>{event.date}</td>
               <td>
-                <Link to={`/events/edit/:${event._id}`}>
+                <Link to={`/events/edit/${event._id}`}>
                 <button className="btn btn-warning me-4">
                   <img src={EditIcon} alt="Icone de edição" />
                 </button>
