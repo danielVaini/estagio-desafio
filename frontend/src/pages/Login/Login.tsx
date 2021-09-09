@@ -1,22 +1,25 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useContext, useState } from 'react';
 import LoginIcon from '../../assets/login-icon.svg';
 import {Link, useHistory} from 'react-router-dom'
 
 import './Login.css'
 import api from '../../server/api';
+import AuthContext from '../../data/store/auth';
 
 const Login = () => {
   const history = useHistory()
   const goEvents = () => history.push('/events')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const context = useContext(AuthContext)
 
   function handleLogin(e: FormEvent){
     e.preventDefault()
     api.post('/login', {email, password})
     .then(result => {
-    
+      context.autenticado = true;
       goEvents()
+      console.log(context.autenticado)
     })
     .catch(error => console.log(error))
   }
