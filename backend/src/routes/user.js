@@ -50,15 +50,18 @@ router.post("/cadastro", (req, res) => {
 
 
 router.post('/login', (req, res, next) => {
-  console.log(req.body.email)
-  passport.authenticate('local', {
+  const auth = passport.authenticate('local', {
     successRedirect: '/events',
     failureRedirect: '/login',
+    
   })(req, res, next)
   
 })
 
-
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/login')
+})
 
 
 

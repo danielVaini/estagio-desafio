@@ -11,12 +11,14 @@ require("./config/auth")(passport);
 
 
 app.use(cors())
-app.use(passport.initialize());
 app.use(session({
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   secret: "apsojfsdiofjdosijfdiosfjisd"
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Moongose
 
