@@ -24,7 +24,7 @@ const Routes = () => {
       <Route path="/events/edit/:id"  component={Edit} /> */}
       <Route path="/sobre"  component={Sobre} />
 
-      <PrivateRouter path="/events" component={Eventos} />
+      <PrivateRouter path="/events" exact component={Eventos} />
       <PrivateRouter path="/events/edit/:id"  component={Edit} />
       </Switch>
     </BrowserRouter>
