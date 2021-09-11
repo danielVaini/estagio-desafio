@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const {isUser} = require("../helpers/isUser");
+
 
 require("../models/Event");
 const Event = mongoose.model("events");
@@ -41,7 +41,7 @@ router.post("/events/add", (req, res) => {
     .catch((error) => res.send(error));
 });
 
-router.put("/events/edit", isUser, (req, res) => {
+router.put("/events/edit",  (req, res) => {
   
   Event.findById(req.body.id).then(event => {
     event.desc = req.body.desc
