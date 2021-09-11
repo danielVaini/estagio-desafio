@@ -24,12 +24,13 @@ const Cadastro = () => {
 
 
   return (
-    <div className="Cadastro container-fluid">
+    <div className="Cadastro ">
       <div className="icon">
         <img src={CadastroIcon} alt="Icone de cadastro"  />
       </div>
-      <form  className="input-bg mb-3">
+      <form  className="input-bg ">
 
+          <img src={CadastroIcon} alt="Icone de cadastro" className="icon-hidden"/>
         <div className="input-container">
           <div className="input-group mb-3">
             <input type="text" className="form-control" placeholder="Nome" name="name" required onChange={e => setName(e.target.value)}/>

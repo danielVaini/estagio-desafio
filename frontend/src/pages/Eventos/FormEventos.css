@@ -1,3 +1,23 @@
-.FormEventos {
+.FormEventos .buttonAdd {
+  margin-top: 23px;
+}
+
+@media (max-width: 800px){
+
+  .FormEventos .row-responsive {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
   
+  }
+  .FormEventos .row-responsive input{
+   width: 330px;
+  
+  }
+  .FormEventos .row-responsive .buttonAdd{
+   width: 330px;
+  
+  }
+
 }

@@ -1,13 +1,21 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import api from '../../server/api';
 
 import AddIcon from '../../assets/plus-square.svg'
+import './FormEventos.css'
 
 const FormEventos = () => {
   const [desc, setDesc] = useState('')
   const [start_time, setStartTime] = useState('')
   const [end_time, setEndTime] = useState('')
   const [date, setDate] = useState('')
+  const [width, setWithd] = useState(window.innerWidth)
+
+  let colTitle = 5
+  let colStartTime = 2
+  let colEndTime = 2
+  let colDate = 2
+  let colBtn = 1
 
   function handleAddevent(e: FormEvent) {
     e.preventDefault()
@@ -25,20 +33,33 @@ const FormEventos = () => {
       window.alert("Cadastrasdo com sucesso")
       })
       .catch(error => window.alert('Erro ao cadastrar'))
-    }
+  }
     
-    function clearInputs() {
+  function clearInputs() {
       setDesc("")
       setStartTime("")
       setEndTime("")
       setDate("")
-    }
+  }
+
+  useEffect(() => {
+    setWithd(window.innerWidth)
+    console.log(width)
+  }, [window.innerWidth])
+
+  if(width <= 800) {
+     colTitle = 3
+     colStartTime = 3
+     colEndTime = 3
+     colDate = 3
+     colBtn = 3
+  }
     
     return (
     <form className="FormEventos mt-4">
       <div className="container-fluid ">
-        <div className="row align-items-end">
-          <div className="col-5">
+        <div className="row  row-responsive">
+          <div className={`col-${colTitle}`}>
             <label htmlFor="title">Titulo</label>
             <input
               type="text"
@@ -50,7 +71,7 @@ const FormEventos = () => {
               required
             />
           </div>
-          <div className="col-2">
+          <div className={`col-${colStartTime}`}>
             <label htmlFor="start-time">Inicio</label>
             <input
               type="time"
@@ -62,7 +83,7 @@ const FormEventos = () => {
               required
             />
           </div>
-          <div className="col-2">
+          <div className={`col-${colEndTime}`}>
             <label htmlFor="end-time">Fim</label>
             <input
               type="time"
@@ -74,7 +95,7 @@ const FormEventos = () => {
               required
             />
           </div>
-          <div className="col-2">
+          <div className={`col-${colDate}`}>
             <label htmlFor="date">Data</label>
             <input
               type="date"
@@ -86,8 +107,8 @@ const FormEventos = () => {
               required
             />
           </div>
-          <div className="col-1">
-            <button className="btn btn-success align-middle" type="submit" onClick={(e) => handleAddevent(e)}>
+          <div className={`col-${colBtn}`}>
+            <button className="btn btn-success align-middle buttonAdd" type="submit" onClick={(e) => handleAddevent(e)}>
               <img src={AddIcon} alt="Icone adicionar" />
             </button>
           </div>

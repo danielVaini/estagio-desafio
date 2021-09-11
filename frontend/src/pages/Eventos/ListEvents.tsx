@@ -24,9 +24,9 @@ const ListEvents = () => {
  
 
   return (
-    <div className="ListEvents">
+    <div className="ListEvents table-responsive">
       <FormEventos />
-      <table className="table mt-5">
+      <table className="table table-bordered mt-5">
       <thead>
         <tr>
           <th>Titulo</th>
